@@ -14,9 +14,7 @@ export default function Navbar() {
   // keep a single observer instance
   const observerRef = useRef(null);
 
-  /* -------------------------------------------------------------------------
-   * Highlight section currently in view
-   * -----------------------------------------------------------------------*/
+  //highlight component in view
   useEffect(() => {
     if (location.pathname !== "/") return; // only run on the landing page
 
@@ -54,28 +52,29 @@ export default function Navbar() {
   const linkClasses = (id) =>
     `group lg:text-lg md:text-base text-sm lg:mr-12 mr-8 tracking-wide relative ${
       active === id && location.pathname === "/"
-        ? "text-olive dark:text-pinkish"
-        : "text-letuce dark:text-mousse"
+        ? "text-gibbouspurple dark:text-gibbouspurple"
+        : "text-gray-950 dark:text-gray-50"
     }`;
 
   /* -------------------------------------------------------------------------
    * Render
    * -----------------------------------------------------------------------*/
   return (
-    <header className="w-full md:h-16 sm:h-14 h-18 flex justify-between items-center xl:px-36 lg:px-24 md:px-12 sm:px-6 px-4 fixed top-0 z-50 bg-cream dark:bg-midnight transition-colors duration-500">
+    <header className="fixed top-8 inset-x-10 z-50 flex items-center h-16 px-5 sm:px-4 bg-gray-50 border-4 dark:bg-midnight transition-colors duration-500">
       {/* Logo + dark-mode toggle ------------------------------------------------ */}
+
       <div className="flex items-center sm:gap-x-4 gap-x-2">
         <HashLink
           to="/#"
-          className="font-bagnard md:text-2xl sm:text-xl text-lg text-olive dark:text-mousse"
+          className=" md:text-3xl font-bold sm:text-xl text-lg text-gray-950 dark:text-gray-50 hover:text-gibbouspurple"
         >
-          Gibbous&nbsp;Designs
+          GIBBOUS&nbsp;DESIGNS
         </HashLink>
 
         <i
           className={`${
             darkMode ? "bx bx-sun" : "bx bx-moon"
-          } md:text-3xl sm:text-2xl text-xl text-letuce dark:text-pinkish sm:ml-4 ml-2 cursor-pointer`}
+          } md:text-3xl sm:text-2xl text-xl text-gray-950 dark:text-gray-50 hover:text-gibbouspurple sm:ml-4 ml-2 cursor-pointer`}
           onClick={toggleDarkMode}
         />
       </div>
@@ -83,48 +82,49 @@ export default function Navbar() {
       {/* Mobile menu button ---------------------------------------------------- */}
       <button
         aria-label="Toggle menu"
-        className="md:hidden text-3xl cursor-pointer"
+        className="md:hidden  text-3xl cursor-pointer ml-auto"
         onClick={() => setIsMenuOpen((prev) => !prev)}
       >
         <i className={`bx ${isMenuOpen ? "bx-x" : "bx-menu"}`} />
       </button>
 
       {/* Desktop nav ----------------------------------------------------------- */}
-      <nav className="hidden md:flex">
-        {sections.map((id) => (
-          <HashLink
-            key={id}
-            smooth
-            to={`/#${id}`}
-            className={`font-bagnard ${linkClasses(id)}`}
-            onClick={() => {
-              setActive(id); // highlight immediately on click
-              setIsMenuOpen(false); // close menu on mobile
-            }}
-          >
-            {id.charAt(0).toUpperCase() + id.slice(1)}
-            {/* underline */}
-            <span
-              className={`absolute -bottom-1 left-0 w-full h-[1px] transform scale-x-0
-                group-hover:scale-x-100 transition duration-300 ${
-                  active === id && location.pathname === "/"
-                    ? "bg-olive dark:bg-pinkish scale-x-100"
-                    : "bg-letuce dark:bg-mousse"
-                }`}
-            />
-          </HashLink>
-        ))}
-      </nav>
-
-      {/* Mobile dropdown ------------------------------------------------------- */}
-      {isMenuOpen && (
-        <nav className="absolute top-full left-0 w-full bg-cream dark:bg-dirt md:hidden flex flex-col items-center py-4 shadow-lg">
+      <div className="flex items-center md:ml-auto lg:ml-auto">
+        <nav className="hidden md:flex items-center space-x-12 sm:ml-auto">
           {sections.map((id) => (
             <HashLink
               key={id}
               smooth
               to={`/#${id}`}
-              className="py-2 text-lg text-olive dark:text-mousse"
+              className={` ${linkClasses(id)}`}
+              onClick={() => {
+                setActive(id); // highlight immediately on click
+                setIsMenuOpen(false); // close menu on mobile
+              }}
+            >
+              {id.toUpperCase()}
+              {/* underline */}
+              <span
+                className={`absolute -bottom-1 left-0 w-full h-[1px] transform scale-x-0
+                group-hover:scale-x-100 transition duration-300 ${
+                  active === id && location.pathname === "/"
+                    ? "bg-gibbouspurple dark:bg-gibbouspurple 7scale-x-100"
+                    : "bg-gibbouspurple dark:bg-gibbouspurple"
+                }`}
+              />
+            </HashLink>
+          ))}
+        </nav>
+      </div>
+      {/* Mobile dropdown ------------------------------------------------------- */}
+      {isMenuOpen && (
+        <nav className="absolute top-full left-0 bg-gray-50 dark:bg-green-950 md:hidden flex flex-col items-center py-4 shadow-lg">
+          {sections.map((id) => (
+            <HashLink
+              key={id}
+              smooth
+              to={`/#${id}`}
+              className="py-2 text-lg text-gray-950 dark:text-gray-50"
               onClick={() => {
                 setActive(id);
                 setIsMenuOpen(false);

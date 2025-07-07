@@ -5,7 +5,7 @@ import { ThemeProvider } from "./context/ThemeContext";
 
 import Navbar from "./components/Navbar";
 import ScrollToTop from "./components/scrollToTop";
-import Hero from "./components/hero";
+import Hero from "./components/Hero";
 import ServicesNew from "./components/ServicesNew";
 import Projects from "./components/Projects";
 import Contact from "./components/Contact";
@@ -20,7 +20,7 @@ const App = () => {
       <ScrollToTop />
       <Navbar />
 
-      <div className="min-h-screen bg-cream dark:bg-midnight text-olive dark:text-mousse transition-colors duration-500">
+      <div className="min-h-screen bg-gray-50 dark:bg-midnight text-gray-900 dark:text-mousse transition-colors duration-500">
         <Routes>
           <Route
             path="/"

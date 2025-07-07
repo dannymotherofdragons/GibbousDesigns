@@ -1,18 +1,19 @@
 @import "tailwindcss";
 
-@font-face {
+/* @font-face {
   font-family: "Bagnard";
   src: url("/fonts/Bagnard.otf") format("opentype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
-}
+} */
 
 @layer base {
-  * {
-    font-family: "Cabin", serif;
+  html {
+    font-family: "Outfit", sans-serif;
   }
 }
+
 html {
   scroll-behavior: smooth;
 }
@@ -54,6 +55,11 @@ html {
   --color-chocolate: #503c3c;
   --color-mousse: #7e6363;
   --color-pinkish: #a87c7c;
+  --color-gibbouspurple: #a555ec;
+  --color-gibbousyellow: #ffff80;
+  --color-gibbousgrey: #eee7f7;
+
+  --breakpoint-md: 785px;
 
   --animate-bounce: bounce 2s infinite;
   @keyframes bounce {
