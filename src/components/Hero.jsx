@@ -110,7 +110,7 @@ const Hero = () => {
           </div>
         </div>
       </div>
-      <NavigationCircles section="home" />
+      {/* <NavigationCircles section="home" /> */}
     </div>
   );
 };

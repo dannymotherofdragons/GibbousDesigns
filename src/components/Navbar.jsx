@@ -60,13 +60,13 @@ export default function Navbar() {
    * Render
    * -----------------------------------------------------------------------*/
   return (
-    <header className="fixed top-8 inset-x-10 z-50 flex items-center h-16 px-5 sm:px-4 bg-gray-50 border-4 dark:bg-midnight transition-colors duration-500">
+    <header className="sticky top-8 mx-6 lg:mx-10 z-50 flex items-center h-18 px-5 bg-gray-50 border-4 dark:bg-midnight transition-colors duration-500">
       {/* Logo + dark-mode toggle ------------------------------------------------ */}
 
       <div className="flex items-center sm:gap-x-4 gap-x-2">
         <HashLink
           to="/#"
-          className=" md:text-3xl font-bold sm:text-xl text-lg text-gray-950 dark:text-gray-50 hover:text-gibbouspurple"
+          className="text-xl lg:text-4xl font-extrabold  text-gray-950 dark:text-gray-50 hover:text-gibbouspurple hover:-translate-y-1 transition-all duration-500"
         >
           GIBBOUS&nbsp;DESIGNS
         </HashLink>
@@ -74,7 +74,7 @@ export default function Navbar() {
         <i
           className={`${
             darkMode ? "bx bx-sun" : "bx bx-moon"
-          } md:text-3xl sm:text-2xl text-xl text-gray-950 dark:text-gray-50 hover:text-gibbouspurple sm:ml-4 ml-2 cursor-pointer`}
+          } md:text-3xl sm:text-2xl text-2xl text-gray-950 dark:text-gray-50 hover:text-gibbouspurple hover:-translate-y-1 transition-all duration-500`}
           onClick={toggleDarkMode}
         />
       </div>
@@ -82,7 +82,7 @@ export default function Navbar() {
       {/* Mobile menu button ---------------------------------------------------- */}
       <button
         aria-label="Toggle menu"
-        className="md:hidden  text-3xl cursor-pointer ml-auto"
+        className="md:hidden text-5xl cursor-pointer ml-auto"
         onClick={() => setIsMenuOpen((prev) => !prev)}
       >
         <i className={`bx ${isMenuOpen ? "bx-x" : "bx-menu"}`} />
@@ -90,13 +90,15 @@ export default function Navbar() {
 
       {/* Desktop nav ----------------------------------------------------------- */}
       <div className="flex items-center md:ml-auto lg:ml-auto">
-        <nav className="hidden md:flex items-center space-x-12 sm:ml-auto">
+        <nav className="hidden md:flex items-center space-x-12 sm:ml-auto ">
           {sections.map((id) => (
             <HashLink
               key={id}
               smooth
               to={`/#${id}`}
-              className={` ${linkClasses(id)}`}
+              className={` ${linkClasses(
+                id
+              )}  hover:text-gibbouspurple hover:-translate-y-1 transition-all duration-500`}
               onClick={() => {
                 setActive(id); // highlight immediately on click
                 setIsMenuOpen(false); // close menu on mobile
@@ -118,7 +120,7 @@ export default function Navbar() {
       </div>
       {/* Mobile dropdown ------------------------------------------------------- */}
       {isMenuOpen && (
-        <nav className="absolute top-full left-0 bg-gray-50 dark:bg-green-950 md:hidden flex flex-col items-center py-4 shadow-lg">
+        <nav className="absolute w-full top-full left-0 bg-gray-50 dark:bg-green-950 md:hidden flex flex-col items-center py-4 shadow-lg">
           {sections.map((id) => (
             <HashLink
               key={id}

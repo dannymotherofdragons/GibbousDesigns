@@ -169,3 +169,14 @@ export const scopeDescriptions = {
   "Mobile App":
     "In today's digital world, ensuring a seamless user experience across all devices is crucial. I implement responsive design techniques using modern CSS frameworks like Tailwind CSS and Bootstrap. By employing fluid grids, flexible layouts, and media queries, I create web pages that look great and function perfectly on desktops, tablets, and smartphones.",
 };
+
+export const scopeTags = {
+  "Web Development": [
+    "Brand Design",
+    "Art Direction",
+    "Creative Consulting",
+    "Design Systems",
+  ],
+  "Mobile App": ["Photography", "Copy Writing"],
+  // …
+};

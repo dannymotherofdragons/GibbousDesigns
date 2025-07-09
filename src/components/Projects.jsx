@@ -92,7 +92,7 @@ const Projects = () => {
         </div>
       </section>
 
-      <NavigationCircles section="work" />
+      {/* <NavigationCircles section="work" /> */}
     </div>
   );
 };
