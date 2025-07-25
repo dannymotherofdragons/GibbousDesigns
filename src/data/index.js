@@ -180,3 +180,9 @@ export const scopeTags = {
   "Mobile App": ["Photography", "Copy Writing"],
   // …
 };
+
+export const stickers = [
+  { id: "s1", src: "images/sticker-do.png" },
+  { id: "s2", src: "images/sticker-dream.png" },
+  { id: "s3", src: "images/sticker-fun.png" },
+];

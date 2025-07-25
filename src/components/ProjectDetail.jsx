@@ -15,9 +15,7 @@ export default function ProjectDetail() {
     );
 
   return (
-    <div className="min-h-screen text-cream px-6 lg:px-20 py-12 flex flex-col items-center justify-center">
-      <Navbar />
-
+    <div className="min-h-screen text-gray-950 px-6 lg:px-20 py-12 flex flex-col items-center justify-center">
       <Availability />
       <h1 className="text-5xl font-light text-center m-6">{project.name}</h1>
       <p className="text-xl font-light text-center max-w-3xl mb-12">

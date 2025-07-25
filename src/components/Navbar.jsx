@@ -60,7 +60,7 @@ export default function Navbar() {
    * Render
    * -----------------------------------------------------------------------*/
   return (
-    <header className="sticky top-8 mx-6 lg:mx-10 z-50 flex items-center h-18 px-5 bg-gray-50 border-4 dark:bg-midnight transition-colors duration-500">
+    <header className="sticky top-8 mx-6 lg:mx-12 z-50 flex items-center h-18 px-5 bg-gray-50 border-4 dark:bg-midnight transition-colors duration-500">
       {/* Logo + dark-mode toggle ------------------------------------------------ */}
 
       <div className="flex items-center sm:gap-x-4 gap-x-2">
@@ -74,7 +74,7 @@ export default function Navbar() {
         <i
           className={`${
             darkMode ? "bx bx-sun" : "bx bx-moon"
-          } md:text-3xl sm:text-2xl text-2xl text-gray-950 dark:text-gray-50 hover:text-gibbouspurple hover:-translate-y-1 transition-all duration-500`}
+          } md:text-3xl sm:text-2xl text-2xl text-gray-950 dark:text-gray-50 hover:text-gibbouspurple font-bold hover:-translate-y-1 transition-all duration-500`}
           onClick={toggleDarkMode}
         />
       </div>

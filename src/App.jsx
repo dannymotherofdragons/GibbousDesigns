@@ -11,6 +11,7 @@ import Projects from "./components/Projects";
 import Contact from "./components/Contact";
 import Availability from "./components/Availability";
 import ProjectDetail from "./components/ProjectDetail";
+import HeroNew from "./components/HeroNew";
 // (optional) tiny helper that scrolls to top on normal route changes
 // import ScrollToTop from "./components/ScrollToTop";
 
@@ -20,13 +21,14 @@ const App = () => {
       <ScrollToTop />
       <Navbar />
 
-      <div className="min-h-screen bg-gray-50 dark:bg-midnight text-gray-900 dark:text-mousse transition-colors duration-500">
+      <div className="min-h-screen bg-gray-100 dark:bg-midnight text-gray-900 dark:text-mousse transition-colors duration-500">
         <Routes>
           <Route
             path="/"
             element={
               <>
-                <Hero />
+                <HeroNew />
+                {/* <Hero /> */}
                 <ServicesNew />
                 <Projects />
                 <Contact />
