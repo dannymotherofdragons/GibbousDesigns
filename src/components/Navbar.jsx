@@ -46,9 +46,7 @@ export default function Navbar() {
     return () => observerRef.current?.disconnect();
   }, [location.pathname]);
 
-  /* -------------------------------------------------------------------------
-   * Helpers
-   * -----------------------------------------------------------------------*/
+  /* Helpers*/
   const linkClasses = (id) =>
     `group lg:text-lg md:text-base text-sm lg:mr-12 mr-8 tracking-wide relative ${
       active === id && location.pathname === "/"
@@ -56,12 +54,9 @@ export default function Navbar() {
         : "text-gray-950 dark:text-gray-50"
     }`;
 
-  /* -------------------------------------------------------------------------
-   * Render
-   * -----------------------------------------------------------------------*/
   return (
     <header className="sticky top-8 mx-6 lg:mx-12 z-50 flex items-center h-18 px-5 bg-gray-50 border-4 dark:bg-midnight transition-colors duration-500">
-      {/* Logo + dark-mode toggle ------------------------------------------------ */}
+      {/* Logo + dark-mode toggle*/}
 
       <div className="flex items-center sm:gap-x-4 gap-x-2">
         <HashLink
@@ -79,7 +74,7 @@ export default function Navbar() {
         />
       </div>
 
-      {/* Mobile menu button ---------------------------------------------------- */}
+      {/* Mobile menu button */}
       <button
         aria-label="Toggle menu"
         className="md:hidden text-5xl cursor-pointer ml-auto"
@@ -88,7 +83,7 @@ export default function Navbar() {
         <i className={`bx ${isMenuOpen ? "bx-x" : "bx-menu"}`} />
       </button>
 
-      {/* Desktop nav ----------------------------------------------------------- */}
+      {/* Desktop nav*/}
       <div className="flex items-center md:ml-auto lg:ml-auto">
         <nav className="hidden md:flex items-center space-x-12 sm:ml-auto ">
           {sections.map((id) => (
@@ -118,7 +113,7 @@ export default function Navbar() {
           ))}
         </nav>
       </div>
-      {/* Mobile dropdown ------------------------------------------------------- */}
+      {/* Mobile dropdown */}
       {isMenuOpen && (
         <nav className="absolute w-full top-full left-0 bg-gray-50 dark:bg-green-950 md:hidden flex flex-col items-center py-4 shadow-lg">
           {sections.map((id) => (

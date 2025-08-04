@@ -182,7 +182,40 @@ export const scopeTags = {
 };
 
 export const stickers = [
-  { id: "s1", src: "images/sticker-do.png" },
-  { id: "s2", src: "images/sticker-dream.png" },
-  { id: "s3", src: "images/sticker-fun.png" },
+  {
+    id: "s1",
+    src: "/images/sticker-do.png",
+
+    mobile: { top: 4, left: 8, size: "w-32" }, // ~112 px
+    tablet: { top: 18, left: 50, size: "w-36" }, // ~144 px
+    desktop: { top: 14, left: 2, size: "w-48" }, // ~192 px
+  },
+  {
+    id: "s2",
+    src: "/images/sticker-dream.png",
+    mobile: { top: 23, left: 64, size: "w-28" },
+    tablet: { top: 30, left: 20, size: "w-40" },
+    desktop: { top: 4, left: 18, size: "w-56" },
+  },
+  {
+    id: "s3",
+    src: "/images/sticker-fun.png",
+    mobile: { top: 20, left: 28, size: "w-24" },
+    tablet: { top: 45, left: 70, size: "w-36" },
+    desktop: { top: 52, left: 4, size: "w-52" },
+  },
+  {
+    id: "s4",
+    src: "/images/sticker-websites_2.png",
+    mobile: { top: 6, left: 45, size: "w-44" },
+    tablet: { top: 45, left: 70, size: "w-36" },
+    desktop: { top: 40, left: 16, size: "w-52" },
+  },
+  {
+    id: "s5",
+    src: "/images/sticker-warning.png",
+    mobile: { top: 66, left: 8, size: "w-34" },
+    tablet: { top: 15, left: 70, size: "w-36" },
+    desktop: { top: 40, left: 85, size: "w-46" },
+  },
 ];

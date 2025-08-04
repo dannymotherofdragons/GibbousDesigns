@@ -5,9 +5,8 @@ import { ThemeProvider } from "./context/ThemeContext";
 
 import Navbar from "./components/Navbar";
 import ScrollToTop from "./components/scrollToTop";
-import Hero from "./components/Hero";
 import ServicesNew from "./components/ServicesNew";
-import Projects from "./components/Projects";
+import ProjectsNew from "./components/ProjectsNew";
 import Contact from "./components/Contact";
 import Availability from "./components/Availability";
 import ProjectDetail from "./components/ProjectDetail";
@@ -30,7 +29,7 @@ const App = () => {
                 <HeroNew />
                 {/* <Hero /> */}
                 <ServicesNew />
-                <Projects />
+                <ProjectsNew />
                 <Contact />
                 <Availability />
               </>
