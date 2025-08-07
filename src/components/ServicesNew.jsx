@@ -30,7 +30,7 @@ export default function ServicesNew() {
   return (
     <div
       id="services"
-      className="min-h-screen w-full flex flex-col px-6 lg:px-12 lg:mt-30 mt-auto"
+      className=" min-h-80vh lg:min-h-screen w-full flex flex-col px-6 lg:px-12 lg:mt-30 mt-auto"
     >
       <h2 className=" text-[40px] lg:text-[70px] font-bold text-left pb-8 border-b-4 border-gray-950 ">
         Services

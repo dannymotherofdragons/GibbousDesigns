@@ -1,42 +1,43 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef } from "react";
 import { Link } from "react-router-dom";
 import { projects } from "../data";
 import { motion, useScroll, useTransform } from "framer-motion";
 
-/* -------------------------------------------
-   Breakpoint helper (sm <640, md ≥640, lg ≥1024)
-------------------------------------------- */
-// function useBreakpoint() {
-//   const get = () =>
-//     window.innerWidth >= 1024 ? "lg" : window.innerWidth >= 640 ? "md" : "sm";
-//   const [bp, setBp] = useState(get());
-//   useEffect(() => {
-//     const onR = () => setBp(get());
-//     window.addEventListener("resize", onR);
-//     return () => window.removeEventListener("resize", onR);
-//   }, []);
-//   return bp; // "sm" | "md" | "lg"
-// }
-
+/* ------------------------------------------------------------
+   Build per-item transforms
+------------------------------------------------------------ */
 function buildTransforms(progress, idx, total) {
+  const isLast = idx === total - 1;
+
   const slice = 1 / total;
   const start = idx * slice;
   const inEnd = start + slice * 0.35;
   const outBeg = start + slice * 0.65;
   const end = start + slice;
 
+  /* 3-D rotation */
   const rotateX = useTransform(
     progress,
     [start, inEnd, outBeg, end],
-    idx === 0 ? [0, 0, 0, -90] : [90, 0, 0, -90]
+    isLast
+      ? [90, 0, 0, 0] // last card never flips out
+      : idx === 0
+      ? [0, 0, 0, -90] // first card loads flat, flips away
+      : [90, 0, 0, -90] // others: flip in → flat → flip out
   );
 
+  /* opacity */
   const cardOpacity = useTransform(
     progress,
     [start, inEnd, outBeg, end],
-    idx === 0 ? [1, 1, 1, 0] : [0, 1, 1, 0]
+    isLast
+      ? [0, 1, 1, 1] // last card stays visible
+      : idx === 0
+      ? [1, 1, 1, 0]
+      : [0, 1, 1, 0]
   );
 
+  /* headline slides vertically (unchanged) */
   const headlineY = useTransform(
     progress,
     [start, inEnd, outBeg, end],
@@ -60,6 +61,9 @@ function buildTransforms(progress, idx, total) {
   };
 }
 
+/* ------------------------------------------------------------
+   Main component
+------------------------------------------------------------ */
 export default function ProjectsScroller() {
   const stageRef = useRef(null);
   const { scrollYProgress } = useScroll({
@@ -71,10 +75,10 @@ export default function ProjectsScroller() {
     <section ref={stageRef} style={{ height: `${projects.length * 100}vh` }}>
       <div
         id="work"
-        className="
-          sticky top-0 h-screen w-full overflow-hidden
-          [perspective:800px] sm:[perspective:900px] lg:[perspective:1000px]
-        "
+        className="sticky top-0 h-screen w-full overflow-hidden
+             [perspective:400px] sm:[perspective:900px] lg:[perspective:1000px]
+             scroll-mt-32 lg:scroll-mt-36 mb-36
+             px-6 lg:px-12 pt-0 lg:pt-0"
       >
         {projects.map((p, i) => {
           const {
@@ -89,40 +93,38 @@ export default function ProjectsScroller() {
           return (
             <article
               key={p.id}
-              className="absolute inset-0 flex items-center justify-center pointer-events-none"
+              className="absolute inset-0 flex items-center justify-center pointer-events-none  pt-16 sm:pt-20" /* 1 rem (=16 px) on mobile, 5 rem on ≥640 px */
               style={{ zIndex: projects.length - i }}
             >
-              {/* Headline (slides only) */}
+              {/* headline */}
               <motion.h2
                 style={{ y: headlineY }}
                 className="
                   absolute inset-0 flex items-center justify-center pointer-events-none
-                  whitespace-nowrap
-                  text-[28vw] sm:text-[18vw] md:text-[12vw] lg:text-[8vw]
+                  whitespace-nowrap text-[28vw] sm:text-[18vw] md:text-[12vw] lg:text-[8vw]
                   font-extrabold uppercase
                 "
               >
                 {p.name}&nbsp;{p.name}&nbsp;{p.name}&nbsp;
               </motion.h2>
 
-              {/* Single flipping CARD (image + info) */}
+              {/* flipping card */}
               <motion.div
                 style={{ rotateX, opacity: cardOpacity, pointerEvents }}
                 className="
-                  relative
-                  overflow-hidden [transform-style:preserve-3d] bg-white
+                  relative overflow-hidden [transform-style:preserve-3d] bg-white
                   shadow-[0_30px_60px_-10px_rgba(0,0,0,0.25)]
                   w-[90vw] sm:w-[70vw] lg:w-[35vw]
                   h-[32vh] sm:h-[40vh] lg:h-[60vh]
                   max-w-[92vw] sm:max-w-3xl
                 "
               >
-                {/* front face (image) — full-bleed with 1px overdraw to kill thin seams */}
+                {/* front face image */}
                 <img
                   src={p.image}
                   alt={p.name}
                   className="
-                    absolute -inset-px block
+                    absolute block
                     w-[calc(100%+2px)] h-[calc(100%+2px)]
                     object-cover
                     [backface-visibility:hidden]
@@ -130,7 +132,7 @@ export default function ProjectsScroller() {
                   "
                 />
 
-                {/* back face (optional) */}
+                {/* back face */}
                 <div
                   className="
                     absolute inset-0 flex items-center justify-center
@@ -141,7 +143,7 @@ export default function ProjectsScroller() {
                   {p.name}
                 </div>
 
-                {/* INFO BAR (counter-rotated to stay crisp) */}
+                {/* info bar */}
                 <motion.div
                   style={{ rotateX: infoFacing, opacity: infoOpacity }}
                   className="absolute inset-x-0 bottom-0 [transform-style:preserve-3d] [will-change:transform]"
