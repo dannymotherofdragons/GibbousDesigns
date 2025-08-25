@@ -41,7 +41,9 @@ function buildTransforms(progress, idx, total) {
   const headlineY = useTransform(
     progress,
     [start, inEnd, outBeg, end],
-    ["100%", "0%", "0%", "-100%"]
+    isLast
+      ? ["100%", "0%", "0%", "0%"] // last card: slide in, then FREEZE
+      : ["100%", "0%", "0%", "-100%"] // others: slide in, then slide out
   );
 
   const pointerEvents = useTransform(cardOpacity, (v) =>
@@ -70,15 +72,30 @@ export default function ProjectsScroller() {
     target: stageRef,
     offset: ["start start", "end end"],
   });
+  const total = projects.length;
+  const slice = 1 / total;
+  const lastStart = (total - 1) * slice;
+  const lastInEnd = lastStart + slice * 0.35; // when last card is flat
+
+  // Hide projects as soon as Contact begins to cover
+  const stageOpacity = useTransform(
+    scrollYProgress,
+    [lastInEnd, Math.min(1, lastInEnd + slice * 0.5)],
+    [1, 0]
+  );
 
   return (
-    <section ref={stageRef} style={{ height: `${projects.length * 100}vh` }}>
-      <div
-        id="work"
-        className="sticky top-0 h-screen w-full overflow-hidden
-             [perspective:400px] sm:[perspective:900px] lg:[perspective:1000px]
-             scroll-mt-32 lg:scroll-mt-36 mb-36
-             px-6 lg:px-12 pt-0 lg:pt-0"
+    <section
+      id="work"
+      ref={stageRef}
+      style={{ height: `${(projects.length + 1) * 100}dvh` }}
+    >
+      <motion.div
+        style={{ opacity: stageOpacity }}
+        className="sticky top-0 h-[100dvh] w-full overflow-hidden z-10
+  [perspective:400px] sm:[perspective:900px] lg:[perspective:1000px]
+  scroll-mt-32 lg:scroll-mt-36
+  px-6 lg:px-12 pt-0 lg:pt-0"
       >
         {projects.map((p, i) => {
           const {
@@ -93,7 +110,7 @@ export default function ProjectsScroller() {
           return (
             <article
               key={p.id}
-              className="absolute inset-0 flex items-center justify-center pointer-events-none  pt-16 sm:pt-20" /* 1 rem (=16 px) on mobile, 5 rem on ≥640 px */
+              className="absolute inset-0 flex items-center justify-center pointer-events-none pt-16 sm:pt-20" /* 1 rem (=16 px) on mobile, 5 rem on ≥640 px */
               style={{ zIndex: projects.length - i }}
             >
               {/* headline */}
@@ -181,7 +198,7 @@ export default function ProjectsScroller() {
             </article>
           );
         })}
-      </div>
+      </motion.div>
     </section>
   );
 }

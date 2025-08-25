@@ -16,7 +16,7 @@ export default function Contact() {
         w-full
         px-6 lg:px-12
         pt-20 lg:pt-14
-        pb-10
+        pb-10 bg-gray-100 
       "
     >
       {/* 2-column on ≥1024px, stacked below */}

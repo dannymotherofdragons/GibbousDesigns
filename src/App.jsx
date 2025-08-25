@@ -1,5 +1,7 @@
+// App.jsx
 import React from "react";
 import { Routes, Route } from "react-router-dom";
+import { projects } from "./data"; // <-- add this
 
 import { ThemeProvider } from "./context/ThemeContext";
 
@@ -11,10 +13,12 @@ import Contact from "./components/Contact";
 import Availability from "./components/Availability";
 import ProjectDetail from "./components/ProjectDetail";
 import HeroNew from "./components/HeroNew";
-// (optional) tiny helper that scrolls to top on normal route changes
-// import ScrollToTop from "./components/ScrollToTop";
 
 const App = () => {
+  const n = projects.length;
+  const LATE_FUDGE = 10; // try 2 first; increase to 3–4 if you still want it later
+  const contactMarginTop = `-${65 - LATE_FUDGE}dvh`; // smaller magnitude = starts later
+
   return (
     <ThemeProvider>
       <ScrollToTop />
@@ -27,10 +31,17 @@ const App = () => {
             element={
               <>
                 <HeroNew />
-                {/* <Hero /> */}
                 <ServicesNew />
                 <ProjectsNew />
-                <Contact />
+
+                {/* use EXACT overlap instead of -mt-[100vh] */}
+                <section
+                  className="relative z-20"
+                  style={{ marginTop: contactMarginTop }}
+                >
+                  <Contact />
+                </section>
+
                 <Availability />
               </>
             }
