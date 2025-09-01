@@ -56,9 +56,9 @@ export default function HeroNew() {
   return (
     <section
       id="home"
-      className="w-full flex flex-col px-6 lg:px-12 pt-20 lg:pt-10 pb-20"
+      className="flex w-full flex-col px-6 pt-18 pb-20 lg:px-12 lg:pt-6"
     >
-      <h1 className="text-[26px] lg:text-5xl tracking-wide leading-none lg:mt-16 mb-16">
+      <h1 className="text-[26px] lg:text-5xl tracking-wide leading-none lg:mt-16 mb-12">
         We’re an approachable, curious, and collaborative creative studio.
         Partnering with startups and businesses of all kinds, we craft inspiring
         stories and turn bold ideas into reality—together. Let’s collaborate!

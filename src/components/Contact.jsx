@@ -62,13 +62,15 @@ export default function Contact() {
           <label className="flex flex-col space-y-2">
             <span className="uppercase text-sm tracking-wide">Name</span>
             <input
+              id="name"
               type="text"
+              autoComplete="name"
               placeholder="Please enter your name"
               required
               className="
                 h-12 w-full border border-gray-900
                 px-4 text-base outline-none
-                focus:ring-2 focus:ring-gibbouspurple transition
+                focus:ring-2 focus:ring-gibbouspurple transition 
               "
             />
           </label>
@@ -78,7 +80,9 @@ export default function Contact() {
               Email Address
             </span>
             <input
+              id="email"
               type="email"
+              autoComplete="email"
               placeholder="Provide email address"
               required
               className="
@@ -92,6 +96,8 @@ export default function Contact() {
           <label className="flex flex-col space-y-2">
             <span className="uppercase text-sm tracking-wide">Message</span>
             <textarea
+              id="message"
+              autoComplete="off"
               placeholder="Tell us about your project….."
               required
               className="

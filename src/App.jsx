@@ -13,6 +13,7 @@ import Contact from "./components/Contact";
 import Availability from "./components/Availability";
 import ProjectDetail from "./components/ProjectDetail";
 import HeroNew from "./components/HeroNew";
+import LoopText from "./components/LoopText";
 
 const App = () => {
   const n = projects.length;
@@ -32,6 +33,7 @@ const App = () => {
               <>
                 <HeroNew />
                 <ServicesNew />
+                <LoopText />
                 <ProjectsNew />
 
                 {/* use EXACT overlap instead of -mt-[100vh] */}
